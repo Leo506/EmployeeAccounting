@@ -17,13 +17,15 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Учет сотрудников" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" FontWeight="Bold"/>
-        <ListBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Employers}">
+        <ListBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Employers}" SelectedItem="{Binding SelectedEmployer}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding FullName}"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+
+        <TextBlock x:Name="Info" Grid.Row="1" Grid.Column="1" Text="{Binding SelectedEmployer}"/>
 
     </Grid>
 </Window>

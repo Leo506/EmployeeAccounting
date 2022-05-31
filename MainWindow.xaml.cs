@@ -28,5 +28,11 @@ namespace EmployeeAccounting
             viewModel = new EmployerViewModel();
             DataContext = viewModel;
         }
+
+        private void ShowEmployerInfo(object sender, RoutedEventArgs e)
+        {
+            string? info = viewModel.GetInfo(((TextBlock)sender).Text);
+            Info.Text = info;
+        }
     }
 }

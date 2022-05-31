@@ -24,5 +24,10 @@ namespace EmployeeAccounting.Models
             DateOfBirth = date;
             Sex = sex;
         }
+
+        public override string ToString()
+        {
+            return $"Имя: {FullName}\nДата рождения: {DateOfBirth.ToString("yyyy-MM-dd")}\nПол: {(Sex == Gender.M ? "муж." : "жен.")}";
+        }
     }
 }
