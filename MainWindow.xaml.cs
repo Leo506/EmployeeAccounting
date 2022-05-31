@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using EmployeeAccounting.ViewModels;
 
 namespace EmployeeAccounting
 {
@@ -20,9 +21,12 @@ namespace EmployeeAccounting
     /// </summary>
     public partial class MainWindow : Window
     {
+        EmployerViewModel viewModel;
         public MainWindow()
         {
             InitializeComponent();
+            viewModel = new EmployerViewModel();
+            DataContext = viewModel;
         }
     }
 }
