@@ -9,6 +9,26 @@ namespace EmployeeAccounting.DB
 {
     public class StubWorker : IDBWorker
     {
+        public void AddNewDirector(Director director)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddNewHead(DepartmentHead head)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddNewWorker(Worker worker)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<DepartmentHead> GetDepartmentHeads()
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Employer> GetEmployers()
         {
             return new List<Employer>()

@@ -10,5 +10,10 @@ namespace EmployeeAccounting.DB
     public interface IDBWorker
     {
         List<Employer> GetEmployers();
+        List<DepartmentHead> GetDepartmentHeads();
+
+        void AddNewWorker(Worker worker);
+        void AddNewHead(DepartmentHead head);
+        void AddNewDirector(Director director);
     }
 }

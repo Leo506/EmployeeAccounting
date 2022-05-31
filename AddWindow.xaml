@@ -9,7 +9,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="4*"/>
+            <RowDefinition Height="6*"/>
         </Grid.RowDefinitions>
 
         <TextBlock Text="Добавить сотрудника" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
@@ -51,6 +51,7 @@
                 <TextBlock Text="Руководитель"/>
                 <ComboBox x:Name="ChoiceHead"/>
             </StackPanel>
+            <Button Content="Добавить" Click="AddNewEmp" Margin="0 10 0 0"/>
         </StackPanel>
     </Grid>
 

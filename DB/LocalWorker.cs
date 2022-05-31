@@ -124,6 +124,35 @@ namespace EmployeeAccounting.DB
             reader.Dispose();
         }
 
+        public List<DepartmentHead> GetDepartmentHeads()
+        {
+            return departmentHeads;
+        }
+
+        public void AddNewWorker(Worker worker)
+        {
+            string sql = $"call AddNewWorker(\"{worker.FullName}\", \"{worker.DateOfBirth.ToString("yyyy-MM-dd")}\", \"{worker.Sex}\", \"{worker.Head.FullName}\");";
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            command.ExecuteNonQuery();
+        }
+
+        public void AddNewHead(DepartmentHead head)
+        {
+            string sql = $"call AddNewDepartmentHead(\"{head.FullName}\", \"{head.DateOfBirth.ToString("yyyy-MM-dd")}\", \"{head.Sex}\", \"{head.DepartmentName}\");";
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            command.ExecuteNonQuery();
+        }
+
+        public void AddNewDirector(Director director)
+        {
+            string sql = $"call AddNewDirector(\"{director.FullName}\", \"{director.DateOfBirth.ToString("yyyy-MM-dd")}\", \"{director.Sex}\");";
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            command.ExecuteNonQuery();
+        }
+
         ~LocalWorker()
         {
             connection?.Close();
