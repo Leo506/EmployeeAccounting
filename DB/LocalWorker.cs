@@ -15,14 +15,22 @@ namespace EmployeeAccounting.DB
         private MySqlConnection? connection;
 
         private List<DepartmentHead> departmentHeads;
+        private List<Director> directors;
+        private List<Worker> workers;
 
         public LocalWorker()
         {
             connection = new MySqlConnection(connectionString);
             connection.Open();
             departmentHeads = new List<DepartmentHead>();
+            directors = new List<Director>();
+            workers = new List<Worker>();
             FillHeads();
+            FillDirectors();
+            FillWorkers();
         }
+
+        
 
         public List<Employer> GetEmployers()
         {
@@ -41,8 +49,10 @@ namespace EmployeeAccounting.DB
                 Employer toAdd;
                 if (departmentHeads.Select(h => h.FullName).Contains(name))
                     toAdd = departmentHeads.Where(h => h.FullName == name).First();
+                else if (directors.Select(h => h.FullName).Contains(name))
+                    toAdd = directors.Where(h => h.FullName == name).First();
                 else
-                    toAdd = new Employer(name, date, sex);
+                    toAdd = workers.Where(h => h.FullName == name).First();
                 
                 employers.Add(toAdd);
             }
@@ -51,6 +61,28 @@ namespace EmployeeAccounting.DB
             reader.Dispose();
 
             return employers;
+        }
+
+        private void FillWorkers()
+        {
+            string sql = "select * from WorkerInfo;";
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                string name = reader.GetString("EmpFullName");
+                DateTime date = reader.GetDateTime("DateofBirth");
+                Gender sex = reader.GetString("Sex") == "M" ? Gender.M : Gender.F;
+                string headName = reader.GetString("HeadFullName");
+
+                DepartmentHead head = departmentHeads.Where(h => h.FullName == headName).First();
+
+                workers.Add(new Worker(name, date, sex, head));
+            }
+
+            reader.Close();
+            reader.Dispose();
         }
 
         private void FillHeads()
@@ -67,6 +99,25 @@ namespace EmployeeAccounting.DB
                 string depName = reader.GetString("DepartmenName");
 
                 departmentHeads.Add(new DepartmentHead(name, date, sex, depName));
+            }
+
+            reader.Close();
+            reader.Dispose();
+        }
+
+        private void FillDirectors()
+        {
+            string sql = "select * from DirectorInfo;";
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                string name = reader.GetString("FullName");
+                DateTime date = reader.GetDateTime("DateOfBirth");
+                Gender sex = reader.GetString("Sex") == "M" ? Gender.M : Gender.F;
+
+                directors.Add(new Director(name, date, sex));
             }
 
             reader.Close();
