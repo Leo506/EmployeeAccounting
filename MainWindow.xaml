@@ -16,6 +16,10 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
+        <Menu Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <MenuItem Header="Добавить"/>
+        </Menu>
+
         <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Учет сотрудников" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" FontWeight="Bold"/>
         <ListBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Employers}" SelectedItem="{Binding SelectedEmployer}">
             <ListBox.ItemTemplate>
@@ -26,6 +30,8 @@
         </ListBox>
 
         <TextBlock x:Name="Info" Grid.Row="1" Grid.Column="1" Text="{Binding SelectedEmployer}"/>
+
+        
 
     </Grid>
 </Window>
