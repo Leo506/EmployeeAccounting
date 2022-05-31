@@ -8,6 +8,6 @@ namespace EmployeeAccounting.DB
 {
     public class DBFactory
     {
-        public static IDBWorker GetWorker() => new StubWorker();
+        public static IDBWorker GetWorker() => new LocalWorker();
     }
 }
