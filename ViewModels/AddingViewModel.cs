@@ -27,30 +27,37 @@ namespace EmployeeAccounting.ViewModels
 
             try
             {
+                Employer? toAdd;
                 switch (type)
                 {
                     case "Работник":
                         DepartmentHead head = db.GetDepartmentHeads().Where(h => h.FullName == headName).First();
                         Worker worker = new Worker(name, date, gender, head);
-                        db.AddNewRecord(worker);
-                        return true;
+                        toAdd = worker;
+                        break;
 
 
                     case "Руководитель":
                         DepartmentHead h = new DepartmentHead(name, date, gender, depName);
-                        db.AddNewRecord(h);
-                        return true;
+                        toAdd = h;
+                        break;
 
                     case "Директор":
                         Director director = new Director(name, date, gender);
-                        db.AddNewRecord(director);
-                        return true;
+                        toAdd = director;
+                        break;
 
 
                     default:
-                        return false;
+                        toAdd = null;
+                        break;
 
                 }
+
+                if (toAdd == null) return false;
+
+                db.AddNewRecord(toAdd);
+                return true;
             }
             catch (Exception ex)
             {
