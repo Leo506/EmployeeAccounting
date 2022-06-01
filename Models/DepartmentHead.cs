@@ -19,5 +19,11 @@ namespace EmployeeAccounting.Models
         {
             return base.ToString() + $"\nПодразделение: {DepartmentName}";
         }
+
+        public override string GetArgumentsForAdding()
+        {
+            string sex = Sex == Gender.M ? "M" : "F";
+            return $"\"{FullName}\", \"{DateOfBirth.ToString("yyyy-MM-dd")}\", \"{sex}\", \"{DepartmentName}\"";
+        }
     }
 }

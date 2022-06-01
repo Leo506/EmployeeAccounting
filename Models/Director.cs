@@ -15,5 +15,11 @@ namespace EmployeeAccounting.Models
         {
             return base.ToString() + "\nДиректор";
         }
+
+        public override string GetArgumentsForAdding()
+        {
+            string sex = Sex == Gender.M ? "M" : "F";
+            return $"\"{FullName}\", \"{DateOfBirth.ToString("yyyy-MM-dd")}\", \"{sex}\"";
+        }
     }
 }

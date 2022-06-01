@@ -34,31 +34,38 @@ namespace EmployeeAccounting.DB
 
         public List<Employer> GetEmployers()
         {
+            /* List<Employer> employers = new List<Employer>();
+
+             string sql = "call GetAllEmployers();";
+             MySqlCommand command = new MySqlCommand(sql, connection);
+
+             var reader = command.ExecuteReader();
+             while (reader.Read())
+             {
+                 string name = reader.GetString("FullName");
+                 DateTime date = reader.GetDateTime("DateOfBirth");
+                 Gender sex = reader.GetString("Sex") == "M" ? Gender.M : Gender.F;
+
+                 Employer toAdd;
+                 if (departmentHeads.Select(h => h.FullName).Contains(name))
+                     toAdd = departmentHeads.Where(h => h.FullName == name).First();
+                 else if (directors.Select(h => h.FullName).Contains(name))
+                     toAdd = directors.Where(h => h.FullName == name).First();
+                 else
+                     toAdd = workers.Where(h => h.FullName == name).First();
+
+                 employers.Add(toAdd);
+             }
+
+             reader.Close();
+             reader.Dispose();
+
+             return employers;*/
+
             List<Employer> employers = new List<Employer>();
-
-            string sql = "call GetAllEmployers();";
-            MySqlCommand command = new MySqlCommand(sql, connection);
-
-            var reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                string name = reader.GetString("FullName");
-                DateTime date = reader.GetDateTime("DateOfBirth");
-                Gender sex = reader.GetString("Sex") == "M" ? Gender.M : Gender.F;
-
-                Employer toAdd;
-                if (departmentHeads.Select(h => h.FullName).Contains(name))
-                    toAdd = departmentHeads.Where(h => h.FullName == name).First();
-                else if (directors.Select(h => h.FullName).Contains(name))
-                    toAdd = directors.Where(h => h.FullName == name).First();
-                else
-                    toAdd = workers.Where(h => h.FullName == name).First();
-                
-                employers.Add(toAdd);
-            }
-
-            reader.Close();
-            reader.Dispose();
+            employers.AddRange(workers);
+            employers.AddRange(departmentHeads);
+            employers.AddRange(directors);
 
             return employers;
         }
@@ -129,25 +136,10 @@ namespace EmployeeAccounting.DB
             return departmentHeads;
         }
 
-        public void AddNewWorker(Worker worker)
+
+        public void AddNewRecord(Employer employer)
         {
-            string sql = $"call AddNewWorker(\"{worker.FullName}\", \"{worker.DateOfBirth.ToString("yyyy-MM-dd")}\", \"{worker.Sex}\", \"{worker.Head.FullName}\");";
-            MySqlCommand command = new MySqlCommand(sql, connection);
-
-            command.ExecuteNonQuery();
-        }
-
-        public void AddNewHead(DepartmentHead head)
-        {
-            string sql = $"call AddNewDepartmentHead(\"{head.FullName}\", \"{head.DateOfBirth.ToString("yyyy-MM-dd")}\", \"{head.Sex}\", \"{head.DepartmentName}\");";
-            MySqlCommand command = new MySqlCommand(sql, connection);
-
-            command.ExecuteNonQuery();
-        }
-
-        public void AddNewDirector(Director director)
-        {
-            string sql = $"call AddNewDirector(\"{director.FullName}\", \"{director.DateOfBirth.ToString("yyyy-MM-dd")}\", \"{director.Sex}\");";
+            string sql = $"call AddNew{employer.GetType().Name}({employer.GetArgumentsForAdding()});";
             MySqlCommand command = new MySqlCommand(sql, connection);
 
             command.ExecuteNonQuery();

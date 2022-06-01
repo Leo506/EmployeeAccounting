@@ -29,5 +29,7 @@ namespace EmployeeAccounting.Models
         {
             return $"Имя: {FullName}\nДата рождения: {DateOfBirth.ToString("yyyy-MM-dd")}\nПол: {(Sex == Gender.M ? "муж." : "жен.")}";
         }
+
+        public virtual string GetArgumentsForAdding() => "";
     }
 }

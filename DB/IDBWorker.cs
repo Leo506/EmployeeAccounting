@@ -12,8 +12,6 @@ namespace EmployeeAccounting.DB
         List<Employer> GetEmployers();
         List<DepartmentHead> GetDepartmentHeads();
 
-        void AddNewWorker(Worker worker);
-        void AddNewHead(DepartmentHead head);
-        void AddNewDirector(Director director);
+        public void AddNewRecord(Employer employer);
     }
 }

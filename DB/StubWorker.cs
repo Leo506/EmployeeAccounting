@@ -19,6 +19,11 @@ namespace EmployeeAccounting.DB
             throw new NotImplementedException();
         }
 
+        public void AddNewRecord(Employer employer)
+        {
+            throw new NotImplementedException();
+        }
+
         public void AddNewWorker(Worker worker)
         {
             throw new NotImplementedException();

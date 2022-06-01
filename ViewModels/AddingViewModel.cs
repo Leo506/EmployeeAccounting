@@ -32,19 +32,18 @@ namespace EmployeeAccounting.ViewModels
                     case "Работник":
                         DepartmentHead head = db.GetDepartmentHeads().Where(h => h.FullName == headName).First();
                         Worker worker = new Worker(name, date, gender, head);
-                        db.AddNewWorker(worker);
+                        db.AddNewRecord(worker);
                         return true;
 
 
                     case "Руководитель":
                         DepartmentHead h = new DepartmentHead(name, date, gender, depName);
-                        db.AddNewHead(h);
+                        db.AddNewRecord(h);
                         return true;
-                        break;
 
                     case "Директор":
                         Director director = new Director(name, date, gender);
-                        db.AddNewDirector(director);
+                        db.AddNewRecord(director);
                         return true;
 
 
