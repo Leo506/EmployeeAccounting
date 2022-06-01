@@ -71,6 +71,8 @@ namespace EmployeeAccounting
             {
                 MessageBox.Show("Error");
             }
+            else
+                DialogResult = true;
         }
     }
 }

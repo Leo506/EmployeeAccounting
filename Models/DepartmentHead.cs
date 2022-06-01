@@ -25,5 +25,10 @@ namespace EmployeeAccounting.Models
             string sex = Sex == Gender.M ? "M" : "F";
             return $"\"{FullName}\", \"{DateOfBirth.ToString("yyyy-MM-dd")}\", \"{sex}\", \"{DepartmentName}\"";
         }
+
+        public override string GetArgumentForRemove()
+        {
+            return $"\"{FullName}\", \"{Replacement?.FullName}\"";
+        }
     }
 }

@@ -18,6 +18,8 @@ namespace EmployeeAccounting.Models
         public DateTime DateOfBirth { get; private set; }
         public Gender Sex { get; private set; }
 
+        public Employer Replacement { get; set; }
+
         public Employer(string name, DateTime date, Gender sex)
         {
             FullName = name;
@@ -31,5 +33,7 @@ namespace EmployeeAccounting.Models
         }
 
         public virtual string GetArgumentsForAdding() => "";
+
+        public virtual string GetArgumentForRemove() => "";
     }
 }

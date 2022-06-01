@@ -34,5 +34,19 @@ namespace EmployeeAccounting
             string? info = viewModel.GetInfo(((TextBlock)sender).Text);
             Info.Text = info;
         }
+
+        private void ShowAddingForm(object sender, RoutedEventArgs e)
+        {
+            var adding = new AddWindow();
+            adding.ShowDialog();
+            viewModel.UpdateData();
+        }
+
+        private void ShowRemovingForm(object sender, RoutedEventArgs e)
+        {
+            var removing = new RemovingWindow();
+            removing.ShowDialog();
+            viewModel.UpdateData();
+        }
     }
 }

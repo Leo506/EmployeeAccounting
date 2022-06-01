@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,33 +35,6 @@ namespace EmployeeAccounting.DB
 
         public List<Employer> GetEmployers()
         {
-            /* List<Employer> employers = new List<Employer>();
-
-             string sql = "call GetAllEmployers();";
-             MySqlCommand command = new MySqlCommand(sql, connection);
-
-             var reader = command.ExecuteReader();
-             while (reader.Read())
-             {
-                 string name = reader.GetString("FullName");
-                 DateTime date = reader.GetDateTime("DateOfBirth");
-                 Gender sex = reader.GetString("Sex") == "M" ? Gender.M : Gender.F;
-
-                 Employer toAdd;
-                 if (departmentHeads.Select(h => h.FullName).Contains(name))
-                     toAdd = departmentHeads.Where(h => h.FullName == name).First();
-                 else if (directors.Select(h => h.FullName).Contains(name))
-                     toAdd = directors.Where(h => h.FullName == name).First();
-                 else
-                     toAdd = workers.Where(h => h.FullName == name).First();
-
-                 employers.Add(toAdd);
-             }
-
-             reader.Close();
-             reader.Dispose();
-
-             return employers;*/
 
             List<Employer> employers = new List<Employer>();
             employers.AddRange(workers);
@@ -141,6 +115,16 @@ namespace EmployeeAccounting.DB
         {
             string sql = $"call AddNew{employer.GetType().Name}({employer.GetArgumentsForAdding()});";
             MySqlCommand command = new MySqlCommand(sql, connection);
+
+            command.ExecuteNonQuery();
+        }
+
+        public void Remove(Employer employer)
+        {
+            string sql = $"call Remove{employer.GetType().Name}({employer.GetArgumentForRemove()});";
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            Trace.WriteLine("sql: " + sql);
 
             command.ExecuteNonQuery();
         }

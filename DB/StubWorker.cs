@@ -43,5 +43,10 @@ namespace EmployeeAccounting.DB
                 new Employer("GGG HHH III", new DateTime(1989, 6, 6), Gender.M)
             };
         }
+
+        public void Remove(Employer employer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

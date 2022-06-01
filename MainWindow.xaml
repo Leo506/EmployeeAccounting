@@ -17,11 +17,12 @@
         </Grid.ColumnDefinitions>
 
         <Menu Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left">
-            <MenuItem Header="Добавить"/>
+            <MenuItem Header="Добавить" Click="ShowAddingForm"/>
+            <MenuItem Header="Удалить" Click="ShowRemovingForm"/>
         </Menu>
 
         <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Учет сотрудников" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" FontWeight="Bold"/>
-        <ListBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Employers}" SelectedItem="{Binding SelectedEmployer}">
+        <ListBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Employers, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedEmployer, UpdateSourceTrigger=PropertyChanged}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding FullName}"/>
@@ -29,7 +30,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <TextBlock x:Name="Info" Grid.Row="1" Grid.Column="1" Text="{Binding SelectedEmployer}"/>
+        <TextBlock x:Name="Info" Grid.Row="1" Grid.Column="1" Text="{Binding SelectedEmployer, UpdateSourceTrigger=PropertyChanged}"/>
 
         
 

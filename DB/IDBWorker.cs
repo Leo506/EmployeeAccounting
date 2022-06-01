@@ -12,6 +12,8 @@ namespace EmployeeAccounting.DB
         List<Employer> GetEmployers();
         List<DepartmentHead> GetDepartmentHeads();
 
-        public void AddNewRecord(Employer employer);
+        void AddNewRecord(Employer employer);
+
+        void Remove(Employer employer);
     }
 }

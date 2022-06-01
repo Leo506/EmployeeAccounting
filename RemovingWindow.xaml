@@ -1,0 +1,31 @@
+﻿<Window x:Class="EmployeeAccounting.RemovingWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EmployeeAccounting"
+        mc:Ignorable="d"
+        Title="RemovingWindow" Height="276" Width="489">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Удаление сотрудника" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold"/>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="Сотрудник" FontSize="16"/>
+                <ComboBox x:Name="EmployerChoice" Margin="10 0 0 0" SelectionChanged="OnChoiceChange"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="Новый руководитель подразделения" FontSize="16"/>
+                <ComboBox x:Name="HeadChoice" Margin="10 0 0 0"/>
+            </StackPanel>
+
+            <Button Content="Удалить сотрудника" Click="RemoveEmployer" Margin="0 20 0 0"/>
+        </StackPanel>
+    </Grid>
+</Window>

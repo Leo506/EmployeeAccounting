@@ -36,5 +36,13 @@ namespace EmployeeAccounting.ViewModels
         {
             return Employers.Where(e => e.FullName == name)?.FirstOrDefault()?.ToString();
         }
+
+        public void UpdateData()
+        {
+            Employers = DB.DBFactory.GetWorker().GetEmployers();
+            _selectedEmp = Employers[0];
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedEmployer)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Employers)));
+        }
     }
 }
