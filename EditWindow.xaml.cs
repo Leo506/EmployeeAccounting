@@ -30,7 +30,10 @@ namespace EmployeeAccounting
 
         private void Edit(object sender, RoutedEventArgs e)
         {
-            viewModel.EditEmployer();
+            if (!viewModel.EditEmployer())
+                MessageBox.Show("Error!!!");
+
+            DialogResult = true;
         }
     }
 }

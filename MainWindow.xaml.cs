@@ -48,5 +48,12 @@ namespace EmployeeAccounting
             removing.ShowDialog();
             viewModel.UpdateData();
         }
+
+        private void ShowEditForm(object sender, RoutedEventArgs e)
+        {
+            var editing = new EditWindow();
+            editing.ShowDialog();
+            viewModel.UpdateData();
+        }
     }
 }

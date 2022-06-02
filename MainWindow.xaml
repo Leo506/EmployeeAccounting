@@ -19,6 +19,7 @@
         <Menu Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left">
             <MenuItem Header="Добавить" Click="ShowAddingForm"/>
             <MenuItem Header="Удалить" Click="ShowRemovingForm"/>
+            <MenuItem Header="Радактировать" Click="ShowEditForm"/>
         </Menu>
 
         <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Учет сотрудников" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" FontWeight="Bold"/>
