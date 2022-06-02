@@ -29,6 +29,16 @@ namespace EmployeeAccounting.DB
             throw new NotImplementedException();
         }
 
+        public void Edit(Employer employer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Edit(string name, Employer employer)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<DepartmentHead> GetDepartmentHeads()
         {
             throw new NotImplementedException();

@@ -15,5 +15,7 @@ namespace EmployeeAccounting.DB
         void AddNewRecord(Employer employer);
 
         void Remove(Employer employer);
+
+        void Edit(string name, Employer employer);
     }
 }

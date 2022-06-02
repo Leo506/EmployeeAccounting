@@ -8,7 +8,7 @@ namespace EmployeeAccounting.Models
 {
     public class DepartmentHead : Employer
     {
-        public string DepartmentName { get; private set; }
+        public string DepartmentName { get; set; }
 
         public DepartmentHead(string name, DateTime date, Gender gender, string depName) : base(name, date, gender)
         {

@@ -14,9 +14,9 @@ namespace EmployeeAccounting.Models
 
     public class Employer
     {
-        public string FullName { get; private set; }
-        public DateTime DateOfBirth { get; private set; }
-        public Gender Sex { get; private set; }
+        public string FullName { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        public Gender Sex { get; set; }
 
         public Employer Replacement { get; set; }
 

@@ -129,6 +129,19 @@ namespace EmployeeAccounting.DB
             command.ExecuteNonQuery();
         }
 
+        public void Edit(string name, Employer employer)
+        {
+            string sql = $"call PrepareToEdit(\"{name}\");";
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            command.ExecuteNonQuery();
+
+            AddNewRecord(employer);
+
+            sql = $"call AfterEdit();";
+            command = new MySqlCommand (sql, connection);
+            command.ExecuteNonQuery ();
+        }
+
         ~LocalWorker()
         {
             connection?.Close();
