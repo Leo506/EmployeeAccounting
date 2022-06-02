@@ -30,5 +30,7 @@ namespace EmployeeAccounting.Models
         {
             return $"\"{FullName}\", \"{Replacement?.FullName}\"";
         }
+
+        public override bool NeedReplacement() => true;
     }
 }

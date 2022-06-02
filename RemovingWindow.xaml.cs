@@ -28,31 +28,26 @@ namespace EmployeeAccounting
 
             viewModel = new RemovingViewModel();
 
-            EmployerChoice.ItemsSource = viewModel.EmployerNames;
-            HeadChoice.ItemsSource = viewModel.HeadsNames;
-            HeadChoice.IsEnabled = false;
+            DataContext = viewModel;
         }
 
         private void OnChoiceChange(object sender, SelectionChangedEventArgs e)
         {
-            Trace.WriteLine(EmployerChoice.SelectedIndex);
-            if (viewModel.IsHead(viewModel.Employers[EmployerChoice.SelectedIndex]))
+            if (viewModel.SelectedEmployer.GetType() == typeof(Models.DepartmentHead))
                 HeadChoice.IsEnabled = true;
             else
                 HeadChoice.IsEnabled = false;
+
+            Trace.WriteLine($"Selected employer: " + viewModel.SelectedEmployer.FullName);
+            Trace.WriteLine($"Selected replacement == null ?: " + viewModel.SelectedReplacement == null);
         }
 
         private void RemoveEmployer(object sender, RoutedEventArgs e)
         {
-            string toRemove = viewModel.EmployerNames[EmployerChoice.SelectedIndex];
-
-            int? replaceIndex = HeadChoice.SelectedIndex < 0 || HeadChoice.SelectedIndex >= viewModel.HeadsNames.Count ? null : HeadChoice.SelectedIndex;
-
-            string? toReplace = replaceIndex == null ? null : viewModel.HeadsNames[replaceIndex.Value];
-
-            viewModel.RemoveEmployer(toRemove, toReplace);
-
-            DialogResult = true;
+            if (!viewModel.Remove())
+                MessageBox.Show("Error!!!");
+            else
+                DialogResult = true;
         }
     }
 }

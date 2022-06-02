@@ -35,5 +35,7 @@ namespace EmployeeAccounting.Models
         public virtual string GetArgumentsForAdding() => "";
 
         public virtual string GetArgumentForRemove() => "";
+
+        public virtual bool NeedReplacement() => false;
     }
 }

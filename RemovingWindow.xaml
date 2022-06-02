@@ -17,12 +17,24 @@
             
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBlock Text="Сотрудник" FontSize="16"/>
-                <ComboBox x:Name="EmployerChoice" Margin="10 0 0 0" SelectionChanged="OnChoiceChange"/>
+                <ComboBox x:Name="EmployerChoice" Margin="10 0 0 0" SelectionChanged="OnChoiceChange" ItemsSource="{Binding Employers}" SelectedItem="{Binding SelectedEmployer}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding FullName}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBlock Text="Новый руководитель подразделения" FontSize="16"/>
-                <ComboBox x:Name="HeadChoice" Margin="10 0 0 0"/>
+                <ComboBox x:Name="HeadChoice" Margin="10 0 0 0" ItemsSource="{Binding AvailableReplacement}" SelectedItem="{Binding SelectedReplacement}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding FullName}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
             </StackPanel>
 
             <Button Content="Удалить сотрудника" Click="RemoveEmployer" Margin="0 20 0 0"/>
