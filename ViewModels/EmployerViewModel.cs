@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EmployeeAccounting.Models;
+using EmployeeAccounting.DB;
+using EmployeeAccounting.Selection;
 
 namespace EmployeeAccounting.ViewModels
 {
@@ -24,10 +26,21 @@ namespace EmployeeAccounting.ViewModels
             }
         }
 
+        IDBWorker worker;
+
         public EmployerViewModel()
         {
-            Employers = DB.DBFactory.GetWorker().GetEmployers();
+            worker = DBFactory.GetWorker();
+            Employers = worker.GetEmployers();
             _selectedEmp = Employers[0];
+
+            RoleSelectionViewModel.SelectonChooseEvent += OnSelection;
+            DepartmentSelectionViewModel.SelectonChooseEvent += OnSelection;
+        }
+
+        public void OnSelection(ISelector<Employer> selector)
+        {
+            Employers = selector.Select(Employers);
         }
 
         

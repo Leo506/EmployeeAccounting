@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EmployeeAccounting.Selection
 {
-    public class DepartmentSelector : ISelector<EmployeeAccounting.Models.Employer>
+    public class DepartmentSelector<T> : ISelector<T>
     {
         private string departmentName;
 
@@ -15,18 +15,18 @@ namespace EmployeeAccounting.Selection
         {
             departmentName = depName;
         }
-        public List<Employer> Select(List<Employer> original)
+        public List<T> Select(List<T> original)
         {
             List<Employer> toReturn = new List<Employer>();
 
-            foreach (Employer employer in original)
+            foreach (var employer in original)
             {
                 Worker? worker = employer as Worker;
                 if (worker != null)
                 {
                     string? dep = worker?.Head?.DepartmentName;
                     if (dep == departmentName)
-                        toReturn.Add(employer);
+                        toReturn.Add(worker);
                 }
 
                 DepartmentHead? head = employer as DepartmentHead;
@@ -34,7 +34,7 @@ namespace EmployeeAccounting.Selection
                 {
                     string dep = head.DepartmentName;
                     if (dep == departmentName)
-                        toReturn.Add(employer);
+                        toReturn.Add(head);
                 }
             }
 
