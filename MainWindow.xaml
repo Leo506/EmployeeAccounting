@@ -20,6 +20,10 @@
             <MenuItem Header="Добавить" Click="ShowAddingForm"/>
             <MenuItem Header="Удалить" Click="ShowRemovingForm"/>
             <MenuItem Header="Радактировать" Click="ShowEditForm"/>
+            <MenuItem Header="Выборка">
+                <MenuItem Header="По должности"/>
+                <MenuItem Header="По подразделению"/>
+            </MenuItem>
         </Menu>
 
         <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Учет сотрудников" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" FontWeight="Bold"/>
