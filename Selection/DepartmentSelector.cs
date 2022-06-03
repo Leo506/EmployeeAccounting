@@ -17,7 +17,7 @@ namespace EmployeeAccounting.Selection
         }
         public List<T> Select(List<T> original)
         {
-            List<Employer> toReturn = new List<Employer>();
+            List<T> toReturn = new List<T>();
 
             foreach (var employer in original)
             {
@@ -26,7 +26,7 @@ namespace EmployeeAccounting.Selection
                 {
                     string? dep = worker?.Head?.DepartmentName;
                     if (dep == departmentName)
-                        toReturn.Add(worker);
+                        toReturn.Add(employer);
                 }
 
                 DepartmentHead? head = employer as DepartmentHead;
@@ -34,7 +34,7 @@ namespace EmployeeAccounting.Selection
                 {
                     string dep = head.DepartmentName;
                     if (dep == departmentName)
-                        toReturn.Add(head);
+                        toReturn.Add(employer);
                 }
             }
 

@@ -15,7 +15,7 @@ namespace EmployeeAccounting.ViewModels
         public string SelectedRole { get; set; }
         public string[] RoleNames { get; private set; }
 
-        public RoleSelectionViewModel(EmployerViewModel viewModel)
+        public RoleSelectionViewModel()
         {
             RoleNames = new string[] { "Руководитель", "Рабочий", "Директор" };
             SelectedRole = RoleNames[0];

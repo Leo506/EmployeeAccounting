@@ -41,6 +41,8 @@ namespace EmployeeAccounting.ViewModels
         public void OnSelection(ISelector<Employer> selector)
         {
             Employers = selector.Select(Employers);
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Employers)));
+            Employers = worker.GetEmployers();
         }
 
         
@@ -52,7 +54,8 @@ namespace EmployeeAccounting.ViewModels
 
         public void UpdateData()
         {
-            Employers = DB.DBFactory.GetWorker().GetEmployers();
+            worker = DB.DBFactory.GetWorker();
+            Employers = worker.GetEmployers();
             _selectedEmp = Employers[0];
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedEmployer)));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Employers)));

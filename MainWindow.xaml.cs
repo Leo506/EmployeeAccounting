@@ -55,5 +55,17 @@ namespace EmployeeAccounting
             editing.ShowDialog();
             viewModel.UpdateData();
         }
+
+        private void ShowRoleSelection(object sender, RoutedEventArgs e)
+        {
+            var role = new RoleSelection();
+            role.ShowDialog();
+        }
+
+        private void ShowDepartmentSelection(object sender, RoutedEventArgs e)
+        {
+            var dep = new DepartmentSelection(viewModel);
+            dep.ShowDialog();
+        }
     }
 }

@@ -21,8 +21,8 @@
             <MenuItem Header="Удалить" Click="ShowRemovingForm"/>
             <MenuItem Header="Радактировать" Click="ShowEditForm"/>
             <MenuItem Header="Выборка">
-                <MenuItem Header="По должности"/>
-                <MenuItem Header="По подразделению"/>
+                <MenuItem Header="По должности" Click="ShowRoleSelection"/>
+                <MenuItem Header="По подразделению" Click="ShowDepartmentSelection"/>
             </MenuItem>
         </Menu>
 
