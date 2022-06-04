@@ -29,17 +29,13 @@ namespace EmployeeAccounting
             viewModel = new RemovingViewModel();
 
             DataContext = viewModel;
+
+            HeadChoice.IsEnabled = viewModel.NeedReplacement();
         }
 
         private void OnChoiceChange(object sender, SelectionChangedEventArgs e)
         {
-            if (viewModel.SelectedEmployer.GetType() == typeof(Models.DepartmentHead))
-                HeadChoice.IsEnabled = true;
-            else
-                HeadChoice.IsEnabled = false;
-
-            Trace.WriteLine($"Selected employer: " + viewModel.SelectedEmployer.FullName);
-            Trace.WriteLine($"Selected replacement == null ?: " + viewModel.SelectedReplacement == null);
+            HeadChoice.IsEnabled = viewModel.NeedReplacement();
         }
 
         private void RemoveEmployer(object sender, RoutedEventArgs e)
