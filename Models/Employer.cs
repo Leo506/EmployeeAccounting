@@ -19,8 +19,6 @@ namespace EmployeeAccounting.Models
         public DateTime DateOfBirth { get; set; }
         public Gender Sex { get; set; }
 
-        public Employer Replacement { get; set; }
-
         protected IRole role;
 
         public Employer(string name, DateTime date, Gender sex)
@@ -38,8 +36,6 @@ namespace EmployeeAccounting.Models
         public virtual string GetArgumentsForAdding() => "";
 
         public virtual string GetArgumentForRemove() => "";
-
-        public virtual bool NeedReplacement() => false;
 
         public IRole GetRole() => role;
     }

@@ -4,17 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EmployeeAccounting.Roles;
+using EmployeeAccounting.Interfaces;
 
 namespace EmployeeAccounting.Models
 {
-    public class DepartmentHead : Employer
+    public class DepartmentHead : Employer, IHaveDepartment, INeedReplacement
     {
         public string DepartmentName { get; set; }
+        public object Replacement { get; set; }
 
         public DepartmentHead(string name, DateTime date, Gender gender, string depName) : base(name, date, gender)
         {
             DepartmentName = depName;
             role = new HeadRole();
+            Replacement = null;
         }
 
         public override string ToString()
@@ -30,9 +33,8 @@ namespace EmployeeAccounting.Models
 
         public override string GetArgumentForRemove()
         {
-            return $"\"{FullName}\", \"{Replacement?.FullName}\"";
+            Employer? replacement = Replacement as Employer;
+            return $"\"{FullName}\", \"{replacement?.FullName}\"";
         }
-
-        public override bool NeedReplacement() => true;
     }
 }

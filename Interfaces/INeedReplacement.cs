@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace EmployeeAccounting.Interfaces
 {
-    public interface INeedReplcament
+    public interface INeedReplacement
     {
-        object Replacement { get; set; }
+        public object Replacement { get; set; }
     }
 }

@@ -8,6 +8,6 @@ namespace EmployeeAccounting.Interfaces
 {
     public interface IHaveHead
     {
-        IHaveDepartment Head { get; set; }
+        public IHaveDepartment Head { get; set; }
     }
 }

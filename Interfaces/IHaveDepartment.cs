@@ -8,6 +8,6 @@ namespace EmployeeAccounting.Interfaces
 {
     public interface IHaveDepartment
     {
-        string DepartmentName { get; set; }
+        public string DepartmentName { get; set; }
     }
 }

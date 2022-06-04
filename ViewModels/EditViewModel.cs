@@ -8,6 +8,7 @@ using EmployeeAccounting.Models;
 using EmployeeAccounting.DB;
 using System.Diagnostics;
 using EmployeeAccounting.Roles;
+using EmployeeAccounting.Interfaces;
 
 namespace EmployeeAccounting.ViewModels
 {
@@ -51,12 +52,8 @@ namespace EmployeeAccounting.ViewModels
                 _selectedEmp = value;
                 Heads = Employers.Where(e => e.GetType() == typeof(DepartmentHead) && e.FullName != _selectedEmp.FullName).ToList();
 
-                // TODO избавиться от конкретных классов
-                Worker? tmp = _selectedEmp as Worker;
-                if (tmp != null)
-                    SelectedHead = tmp.Head;
-                else
-                    SelectedHead = Heads.Count > 0 ? Heads[0] : null;
+
+                SelectHead();
                 
                 Sex = _selectedEmp.Sex == Gender.M ? "Муж" : "Жен";
                 FullName = _selectedEmp.FullName;
@@ -106,26 +103,8 @@ namespace EmployeeAccounting.ViewModels
         }
 
 
-        // TODO завести отдельную переменную
-        public string DepartmentName
-        {
-            get
-            {
-                // TODO избавиться от конкретных классов
-                DepartmentHead? head = _selectedEmp as DepartmentHead;
-                return head == null ? "" : head.DepartmentName;
-            }
-            set
-            {
-                // TODO избавиться от конкретных классов
-                DepartmentHead? head = _selectedEmp as DepartmentHead;
-                if (head != null)
-                {
-                    head.DepartmentName = value;
-                    OnPropertyChanged(nameof(DepartmentName));
-                }
-            }
-        }
+        public string DepartmentName { get; set; }
+
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -145,41 +124,13 @@ namespace EmployeeAccounting.ViewModels
             Born = _selectedEmp.DateOfBirth;
 
             Heads = Employers.Where(e => e.GetType() == typeof(DepartmentHead) && e.FullName != _selectedEmp.FullName).ToList();
-            _selectedHead = Heads.Count > 0 ? Heads[0] : null;
+
+            SelectHead();
 
             AvailableGender = new string[] { "Муж", "Жен" };
             AvailableRole = RoleFactory.GetRoles();
 
-            Trace.WriteLine(_selectedEmp.FullName);
-
             Role = AvailableRole.Where(role => role.Name == _selectedEmp.GetRole().Name).First();
-
-            //UpdateRole();
-        }
-
-
-        // TODO удалить
-        private void UpdateRole()
-        {
-            /*string role = _selectedEmp.GetType().Name;
-            switch (role)
-            {
-                case "Worker":
-                    Role = "Рабочий";
-                    break;
-
-                case "DepartmentHead":
-                    Role = "Руководитель";
-                    break;
-
-                case "Director":
-                    Role = "Директор";
-                    break;
-
-                default:
-                    Role = "";
-                    break;
-            }*/
         }
 
 
@@ -190,6 +141,16 @@ namespace EmployeeAccounting.ViewModels
             worker.Edit(_selectedEmp.FullName, employer);
 
             return true;
+        }
+
+
+        private void SelectHead()
+        {
+            IHaveHead? tmp = _selectedEmp as IHaveHead;
+            if (tmp != null)
+                SelectedHead = tmp.Head as Employer;
+            else
+                SelectedHead = Heads.Count > 0 ? Heads[0] : null;
         }
 
         
