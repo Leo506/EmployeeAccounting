@@ -21,5 +21,10 @@ namespace EmployeeAccounting.Roles
 
             return new Worker(name, birth, gender, head);
         }
+
+        public Employer GetEmptyInstance()
+        {
+            return new Worker("Nobody", DateTime.Now, Gender.M);
+        }
     }
 }

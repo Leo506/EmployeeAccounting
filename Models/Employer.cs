@@ -19,6 +19,11 @@ namespace EmployeeAccounting.Models
         public DateTime DateOfBirth { get; set; }
         public Gender Sex { get; set; }
 
+        public static Employer Nobody
+        {
+            get => new Employer("Nobody", DateTime.Now, Gender.M);
+        }
+
         protected IRole role;
 
         public Employer(string name, DateTime date, Gender sex)

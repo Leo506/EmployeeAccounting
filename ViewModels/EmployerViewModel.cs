@@ -15,8 +15,8 @@ namespace EmployeeAccounting.ViewModels
         public event PropertyChangedEventHandler? PropertyChanged;
         public List<Employer> Employers { get; private set; }
 
-        private Employer _selectedEmp;
-        public Employer SelectedEmployer
+        private Employer? _selectedEmp;
+        public Employer? SelectedEmployer
         {
             get { return _selectedEmp; }
             set
@@ -32,7 +32,7 @@ namespace EmployeeAccounting.ViewModels
         {
             worker = DBFactory.GetWorker();
             Employers = worker.GetEmployers();
-            _selectedEmp = Employers[0];
+            _selectedEmp = Employers.Count > 0 ? Employers[0] : null;
 
             RoleSelectionViewModel.SelectonChooseEvent += OnSelection;
             DepartmentSelectionViewModel.SelectonChooseEvent += OnSelection;
@@ -56,7 +56,7 @@ namespace EmployeeAccounting.ViewModels
         {
             worker = DB.DBFactory.GetWorker();
             Employers = worker.GetEmployers();
-            _selectedEmp = Employers[0];
+            _selectedEmp = Employers.Count > 0 ? Employers[0] : null;
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedEmployer)));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Employers)));
         }

@@ -13,6 +13,8 @@ namespace EmployeeAccounting.Roles
 
         string GetBaseClassName();
 
+        Employer GetEmptyInstance();
+
         string Name { get; }
     }
 }

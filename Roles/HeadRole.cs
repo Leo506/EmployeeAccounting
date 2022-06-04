@@ -28,5 +28,10 @@ namespace EmployeeAccounting.Roles
 
             return toReturn;
         }
+
+        public Employer GetEmptyInstance()
+        {
+            return new DepartmentHead("Nobody", DateTime.Now, Gender.M, "");
+        }
     }
 }

@@ -40,13 +40,13 @@ namespace EmployeeAccounting.ViewModels
 
         public bool NeedHead()
         {
-            Employer tmp = Role.GetEmployer(FullName, DateOfBirth, _sex, SelectedHead, DepartmentName);
+            Employer tmp = Role.GetEmptyInstance();
             return (tmp as IHaveHead) != null;
         }
 
         public bool NeedDepartment()
         {
-            Employer tmp = Role.GetEmployer(FullName, DateOfBirth, _sex, SelectedHead, DepartmentName);
+            Employer tmp = Role.GetEmptyInstance();
             return (tmp as IHaveDepartment) != null;
         }
 
@@ -76,7 +76,7 @@ namespace EmployeeAccounting.ViewModels
 
         public bool AddNewEmployer()
         {
-            Employer tmp = Role.GetEmployer(FullName, DateOfBirth, _sex, SelectedHead, DepartmentName);
+            Employer tmp = Role.GetEmployer(FullName, DateOfBirth, _sex, SelectedHead == null ? Employer.Nobody : SelectedHead, DepartmentName);
             worker.AddNewRecord(tmp);
             return true;
         }

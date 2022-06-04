@@ -17,5 +17,10 @@ namespace EmployeeAccounting.Roles
         {
             return new Director(name, birth, gender);
         }
+
+        public Employer GetEmptyInstance()
+        {
+            return new Director("Nobody", DateTime.Now, Gender.M);
+        }
     }
 }
