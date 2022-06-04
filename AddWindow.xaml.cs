@@ -32,47 +32,18 @@ namespace EmployeeAccounting
 
             viewModel = new AddingViewModel();
 
-            ChoiceHead.ItemsSource = viewModel.DepartmentHeads;
+            DataContext = viewModel;
         }
 
         private void OnTypeChange(object sender, SelectionChangedEventArgs e)
         {
-            string type = ((TextBlock)TypeInput.SelectedItem).Text;
-            switch (type)
-            {
-                case "Работник":
-                    ChoiceHead.IsEnabled = true;
-                    DepartmentNameInput.IsEnabled = false;
-                    break;
-
-                case "Руководитель":
-                    DepartmentNameInput.IsEnabled = true;
-                    ChoiceHead.IsEnabled = false;
-                    break;
-
-                default:
-                    ChoiceHead.IsEnabled = false;
-                    DepartmentNameInput.IsEnabled = false;
-                    break;
-            }
+            ChoiceHead.IsEnabled = viewModel.NeedHead();
+            DepartmentNameInput.IsEnabled = viewModel.NeedDepartment();
         }
 
         private void AddNewEmp(object sender, RoutedEventArgs e)
         {
-            string name = NameInput.Text;
-            DateTime date = DateInput.SelectedDate.Value;
-            Models.Gender sex = ((TextBlock)GenderInput.SelectedItem).Text == "Муж" ? Models.Gender.M : Models.Gender.F;
-            string? depName = DepartmentNameInput.Text;
-            string? headName = ChoiceHead.SelectedItem as string;
-
-            Trace.WriteLine($"Name: {name}, headName: {ChoiceHead.SelectedItem}");
-
-            if (!viewModel.AddNewEmployer(((TextBlock)TypeInput.SelectedItem).Text, name, date, sex, depName, headName))
-            {
-                MessageBox.Show("Error");
-            }
-            else
-                DialogResult = true;
+            viewModel.AddNewEmployer();
         }
     }
 }

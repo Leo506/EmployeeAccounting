@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:EmployeeAccounting"
         xmlns:views="cls-namespace:EmployeeAccounting.Views"
         mc:Ignorable="d"
-        Title="AddWindow" Height="330" Width="437">
+        Title="AddWindow" Height="350" Width="437">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -18,39 +18,44 @@
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="ФИО: "/>
-                <TextBox x:Name="NameInput" Width="170"/>
+                <TextBox x:Name="NameInput" Width="170" Text="{Binding FullName}"/>
             </StackPanel>
             
             <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
                 <TextBlock Text="Дата рождения"/>
-                <DatePicker x:Name="DateInput" SelectedDateFormat="Short"/>
+                <DatePicker x:Name="DateInput" SelectedDateFormat="Short" SelectedDate="{Binding DateOfBirth}"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
                 <TextBlock Text="Пол"/>
-                <ComboBox x:Name="GenderInput" Margin="40 0 0 0">
-                    <TextBlock Text="Муж"/>
-                    <TextBlock Text="Жен"/>
-                </ComboBox>
+                <ComboBox x:Name="GenderInput" Margin="40 0 0 0" ItemsSource="{Binding AvailableGender}" SelectedItem="{Binding Sex}"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
                 <TextBlock Text="Тип сотрудника"/>
-                <ComboBox x:Name="TypeInput" Margin="40 0 0 0" SelectionChanged="OnTypeChange" SelectedValue="Работник">
-                    <TextBlock Text="Работник"/>
-                    <TextBlock Text="Руководитель"/>
-                    <TextBlock Text="Директор"/>
+                <ComboBox Margin="40 0 0 0" SelectionChanged="OnTypeChange" ItemsSource="{Binding AvailableRoles}" SelectedItem="{Binding Role}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
                 </ComboBox>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
                 <TextBlock Text="Название подразделения "/>
-                <TextBox x:Name="DepartmentNameInput" Width="90"/>
+                <TextBox x:Name="DepartmentNameInput" Width="90" Text="{Binding DepartmentName}"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
                 <TextBlock Text="Руководитель"/>
-                <ComboBox x:Name="ChoiceHead"/>
+                <ComboBox x:Name="ChoiceHead" ItemsSource="{Binding DepartmentHeads}" SelectedItem="{Binding SelectedHead}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding FullName}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
             </StackPanel>
             <Button Content="Добавить" Click="AddNewEmp" Margin="0 10 0 0"/>
         </StackPanel>
