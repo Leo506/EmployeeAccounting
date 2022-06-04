@@ -72,17 +72,18 @@ namespace EmployeeAccounting.ViewModels
         }
 
 
+        // TODO обновить
         public bool Remove()
         {
-            if (_selectedReplacement == null && _selectedEmployer.NeedReplacement())
+            /*if (_selectedReplacement == null && _selectedEmployer.NeedReplacement())
                 return false;
 
 
             _selectedEmployer.Replacement = _selectedReplacement;
 
-            worker.Remove(_selectedEmployer);
+            worker.Remove(_selectedEmployer);*/
 
-            return true;
+            return false;
         }
     }
 }

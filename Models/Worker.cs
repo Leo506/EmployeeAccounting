@@ -40,10 +40,5 @@ namespace EmployeeAccounting.Models
         {
             return $"\"{FullName}\"";
         }
-
-        public override bool NeedReplacement()
-        {
-            return base.NeedReplacement();
-        }
     }
 }
