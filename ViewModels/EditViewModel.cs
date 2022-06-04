@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using EmployeeAccounting.Models;
 using EmployeeAccounting.DB;
 using System.Diagnostics;
+using EmployeeAccounting.Roles;
 
 namespace EmployeeAccounting.ViewModels
 {
@@ -16,7 +17,7 @@ namespace EmployeeAccounting.ViewModels
         public List<Employer> Heads { get; private set; }
 
         public string[] AvailableGender { get; private set; }
-        public string[] AvailableRole { get; private set; }
+        public List<IRole> AvailableRole { get; private set; }
 
         private string _fullName;
         public string FullName
@@ -49,11 +50,18 @@ namespace EmployeeAccounting.ViewModels
             {
                 _selectedEmp = value;
                 Heads = Employers.Where(e => e.GetType() == typeof(DepartmentHead) && e.FullName != _selectedEmp.FullName).ToList();
-                SelectedHead = Heads.Count > 0 ? Heads[0] : null;
+
+                // TODO избавиться от конкретных классов
+                Worker? tmp = _selectedEmp as Worker;
+                if (tmp != null)
+                    SelectedHead = tmp.Head;
+                else
+                    SelectedHead = Heads.Count > 0 ? Heads[0] : null;
+                
                 Sex = _selectedEmp.Sex == Gender.M ? "Муж" : "Жен";
                 FullName = _selectedEmp.FullName;
                 Born = _selectedEmp.DateOfBirth;
-                UpdateRole();
+                Role = AvailableRole.Where(role => role.Name == _selectedEmp.GetRole().Name).First();
                 
                 OnPropertyChanged(nameof(SelectedEmployer));
                 OnPropertyChanged(nameof(Heads));
@@ -86,8 +94,8 @@ namespace EmployeeAccounting.ViewModels
         }
 
 
-        private string _role;
-        public string Role
+        private IRole _role;
+        public IRole Role
         {
             get => _role;
             set
@@ -98,15 +106,18 @@ namespace EmployeeAccounting.ViewModels
         }
 
 
+        // TODO завести отдельную переменную
         public string DepartmentName
         {
             get
             {
+                // TODO избавиться от конкретных классов
                 DepartmentHead? head = _selectedEmp as DepartmentHead;
                 return head == null ? "" : head.DepartmentName;
             }
             set
             {
+                // TODO избавиться от конкретных классов
                 DepartmentHead? head = _selectedEmp as DepartmentHead;
                 if (head != null)
                 {
@@ -137,14 +148,20 @@ namespace EmployeeAccounting.ViewModels
             _selectedHead = Heads.Count > 0 ? Heads[0] : null;
 
             AvailableGender = new string[] { "Муж", "Жен" };
-            AvailableRole = new string[] { "Рабочий", "Руководитель", "Директор" };
+            AvailableRole = RoleFactory.GetRoles();
 
-            UpdateRole();
+            Trace.WriteLine(_selectedEmp.FullName);
+
+            Role = AvailableRole.Where(role => role.Name == _selectedEmp.GetRole().Name).First();
+
+            //UpdateRole();
         }
 
+
+        // TODO удалить
         private void UpdateRole()
         {
-            string role = _selectedEmp.GetType().Name;
+            /*string role = _selectedEmp.GetType().Name;
             switch (role)
             {
                 case "Worker":
@@ -162,33 +179,17 @@ namespace EmployeeAccounting.ViewModels
                 default:
                     Role = "";
                     break;
-            }
+            }*/
         }
 
 
         public bool EditEmployer()
         {
-            switch (_role)
-            {
-                case "Рабочий":
-                    Worker w = new Worker(FullName, Born, _selectedEmp.Sex, _selectedHead as DepartmentHead);
-                    worker.Edit(_selectedEmp.FullName, w);
-                    return true;
+            Employer employer = _role.GetEmployer(_fullName, _born, _sex, _selectedHead, DepartmentName);
 
-                case "Руководитель":
-                    DepartmentHead h = new DepartmentHead(FullName, Born, _selectedEmp.Sex, DepartmentName);
-                    worker.Edit(_selectedEmp.FullName, h);
-                    return true;
+            worker.Edit(_selectedEmp.FullName, employer);
 
-                case "Директор":
-                    Director d = new Director(FullName, Born, _selectedEmp.Sex);
-                    worker.Edit(_selectedEmp.FullName, d);
-                    return true;
-
-                default:
-                    return false;
-
-            }
+            return true;
         }
 
         

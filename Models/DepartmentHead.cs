@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EmployeeAccounting.Roles;
 
 namespace EmployeeAccounting.Models
 {
@@ -13,6 +14,7 @@ namespace EmployeeAccounting.Models
         public DepartmentHead(string name, DateTime date, Gender gender, string depName) : base(name, date, gender)
         {
             DepartmentName = depName;
+            role = new HeadRole();
         }
 
         public override string ToString()

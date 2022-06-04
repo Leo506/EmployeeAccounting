@@ -33,7 +33,7 @@ namespace EmployeeAccounting
             if (!viewModel.EditEmployer())
                 MessageBox.Show("Error!!!");
 
-            DialogResult = true;
+            //DialogResult = true;
         }
     }
 }

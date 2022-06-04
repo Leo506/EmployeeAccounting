@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EmployeeAccounting.Roles;
 
 namespace EmployeeAccounting.Models
 {
@@ -19,6 +20,8 @@ namespace EmployeeAccounting.Models
         public Gender Sex { get; set; }
 
         public Employer Replacement { get; set; }
+
+        protected IRole role;
 
         public Employer(string name, DateTime date, Gender sex)
         {
@@ -37,5 +40,7 @@ namespace EmployeeAccounting.Models
         public virtual string GetArgumentForRemove() => "";
 
         public virtual bool NeedReplacement() => false;
+
+        public IRole GetRole() => role;
     }
 }

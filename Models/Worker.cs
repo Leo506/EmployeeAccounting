@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EmployeeAccounting.Roles;
 
 namespace EmployeeAccounting.Models
 {
@@ -13,11 +14,13 @@ namespace EmployeeAccounting.Models
         public Worker(string name, DateTime date, Gender sex, DepartmentHead head) : base(name, date, sex)
         {
             Head = head;
+            role = new WorkerRole();
         }
 
         public Worker(string name, DateTime date, Gender sex) : base(name, date, sex)
         {
             Head = null;
+            role = new WorkerRole();
         }
 
         public override string ToString()
