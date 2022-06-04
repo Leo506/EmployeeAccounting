@@ -65,6 +65,8 @@ namespace EmployeeAccounting.ViewModels
                 Born = _selectedEmp.DateOfBirth;
                 
                 SelectRole();
+
+                SelectDepName();
                 
                 OnPropertyChanged(nameof(SelectedEmployer));
                 OnPropertyChanged(nameof(Heads));
@@ -144,14 +146,21 @@ namespace EmployeeAccounting.ViewModels
             AvailableRole = RoleFactory.GetRoles();
 
             SelectRole();
+
+            SelectDepName();
         }
 
 
         public bool EditEmployer()
         {
             Employer employer = _role.GetEmployer(_fullName, _born, _sex, _selectedHead, DepartmentName);
+            
+            INeedReplacement? tmp = _selectedEmp as INeedReplacement;
+            if (tmp != null)
+                tmp.Replacement = _selectedHead;
 
-            worker.Edit(_selectedEmp.FullName, employer);
+
+            worker.Edit(_selectedEmp, employer);
 
             return true;
         }
@@ -171,6 +180,12 @@ namespace EmployeeAccounting.ViewModels
         private void SelectRole()
         {
             Role = AvailableRole.Where(role => role.Name == _selectedEmp.GetRole().Name).First();
+        }
+
+        private void SelectDepName()
+        {
+            IHaveDepartment? tmp = _selectedEmp as IHaveDepartment;
+            DepartmentName = tmp == null ? "" : tmp.DepartmentName;
         }
         
     }

@@ -17,7 +17,14 @@ namespace EmployeeAccounting.Roles
             if (depName == null)
                 throw new ArgumentException("Second additional parametr must be string");
 
-            return new DepartmentHead(name, birth, gender, depName);
+            Employer? replacement = additionalParams[0] as Employer;
+            if (replacement == null)
+                throw new ArgumentException("First additional parametr mus be Employer");
+
+            DepartmentHead toReturn = new DepartmentHead(name, birth, gender, depName);
+            toReturn.Replacement = replacement;
+
+            return toReturn;
         }
     }
 }

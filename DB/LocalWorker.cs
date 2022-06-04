@@ -129,17 +129,19 @@ namespace EmployeeAccounting.DB
             command.ExecuteNonQuery();
         }
 
-        public void Edit(string name, Employer employer)
+        public void Edit(Employer oldEmp, Employer newEmp)
         {
-            string sql = $"call PrepareToEdit(\"{name}\");";
+            string sql = $"call Remove{oldEmp.GetType().Name}({oldEmp.GetArgumentForRemove()});";
+            Trace.WriteLine(sql);
             MySqlCommand command = new MySqlCommand(sql, connection);
+
             command.ExecuteNonQuery();
 
-            AddNewRecord(employer);
+            sql = $"call AddNew{newEmp.GetType().Name}({newEmp.GetArgumentsForAdding()});";
+            Trace.WriteLine(sql);
+            command = new MySqlCommand(sql, connection);
 
-            sql = $"call AfterEdit();";
-            command = new MySqlCommand (sql, connection);
-            command.ExecuteNonQuery ();
+            command.ExecuteNonQuery();
         }
 
         ~LocalWorker()

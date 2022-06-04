@@ -16,6 +16,6 @@ namespace EmployeeAccounting.DB
 
         void Remove(Employer employer);
 
-        void Edit(string name, Employer employer);
+        void Edit(Employer oldEmp, Employer newEmp);
     }
 }

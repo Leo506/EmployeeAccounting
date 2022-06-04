@@ -39,6 +39,11 @@ namespace EmployeeAccounting.DB
             throw new NotImplementedException();
         }
 
+        public void Edit(Employer oldEmp, Employer newEmp)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<DepartmentHead> GetDepartmentHeads()
         {
             throw new NotImplementedException();
