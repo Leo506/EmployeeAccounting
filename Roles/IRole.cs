@@ -11,6 +11,8 @@ namespace EmployeeAccounting.Roles
     {
         Employer GetEmployer(string name, DateTime birth, Gender gender, params object[] additionalParams);
 
+        string GetBaseClassName();
+
         string Name { get; }
     }
 }

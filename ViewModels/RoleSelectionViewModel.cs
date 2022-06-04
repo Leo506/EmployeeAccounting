@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using EmployeeAccounting.Models;
 using EmployeeAccounting.Selection;
+using EmployeeAccounting.Roles;
 
 namespace EmployeeAccounting.ViewModels
 {
@@ -12,34 +13,19 @@ namespace EmployeeAccounting.ViewModels
     {
         public static event Action<TypeSelector<EmployeeAccounting.Models.Employer>>? SelectonChooseEvent;
 
-        public string SelectedRole { get; set; }
-        public string[] RoleNames { get; private set; }
+        public IRole SelectedRole { get; set; }
+        public List<IRole> RoleNames { get; private set; }
 
         public RoleSelectionViewModel()
         {
-            RoleNames = new string[] { "Руководитель", "Рабочий", "Директор" };
+            RoleNames = RoleFactory.GetRoles();
             SelectedRole = RoleNames[0];
         }
 
         public void OnSelectorChoose()
         {
-            switch (SelectedRole)
-            {
-                case "Руководитель":
-                    TypeSelector<Employer> selector = new TypeSelector<Employer>(nameof(DepartmentHead));
-                    SelectonChooseEvent?.Invoke(selector);
-                    break;
-
-                case "Рабочий":
-                    TypeSelector<Employer> selector1 = new TypeSelector<Employer>(nameof(Worker));
-                    SelectonChooseEvent?.Invoke(selector1);
-                    break;
-
-                case "Директор":
-                    TypeSelector<Employer> selector2 = new TypeSelector<Employer>(nameof(Director));
-                    SelectonChooseEvent?.Invoke(selector2);
-                    break;
-            }
+            TypeSelector<Employer> selector = new TypeSelector<Employer>(SelectedRole.GetBaseClassName());
+            SelectonChooseEvent?.Invoke(selector);
         }
 
 

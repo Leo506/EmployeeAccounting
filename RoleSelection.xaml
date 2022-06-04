@@ -12,7 +12,13 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <ComboBox ItemsSource="{Binding RoleNames}" SelectedItem="{Binding SelectedRole}" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <ComboBox ItemsSource="{Binding RoleNames}" SelectedItem="{Binding SelectedRole}" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
 
         <Button Content="Ok" Click="OnChoose" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="50" FontSize="20"/>
     </Grid>

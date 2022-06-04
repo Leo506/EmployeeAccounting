@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using EmployeeAccounting.Selection;
 using EmployeeAccounting.Models;
+using EmployeeAccounting.Interfaces;
 
 namespace EmployeeAccounting.ViewModels
 {
@@ -23,14 +24,14 @@ namespace EmployeeAccounting.ViewModels
             {
                 string depName = "";
 
-                Worker? worker = employer as Worker;
-                if (worker != null)
-                    depName = worker.Head.DepartmentName;
+                IHaveHead? tmpHead = employer as IHaveHead;
+                if (tmpHead != null)
+                    depName = tmpHead.Head.DepartmentName;
 
 
-                DepartmentHead? head = employer as DepartmentHead;
-                if (head != null)
-                    depName = head.DepartmentName;
+                IHaveDepartment? tmpDep= employer as IHaveDepartment;
+                if (tmpDep != null)
+                    depName = tmpDep.DepartmentName;
 
                 if (depName != "" && !DepartmentNames.Contains(depName))
                     DepartmentNames.Add(depName);

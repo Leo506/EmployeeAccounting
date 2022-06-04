@@ -11,6 +11,8 @@ namespace EmployeeAccounting.Roles
     {
         public string Name => "Директор";
 
+        public string GetBaseClassName() => nameof(Director);
+
         public Employer GetEmployer(string name, DateTime birth, Gender gender, params object[] additionalParams)
         {
             return new Director(name, birth, gender);

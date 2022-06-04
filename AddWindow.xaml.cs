@@ -43,7 +43,11 @@ namespace EmployeeAccounting
 
         private void AddNewEmp(object sender, RoutedEventArgs e)
         {
-            viewModel.AddNewEmployer();
+            if (viewModel.AddNewEmployer())
+                DialogResult = true;
+            else
+                MessageBox.Show("Error");
+
         }
     }
 }

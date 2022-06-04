@@ -11,6 +11,8 @@ namespace EmployeeAccounting.Roles
     {
         public string Name => "Рабочий";
 
+        public string GetBaseClassName() => nameof(Worker);
+
         public Employer GetEmployer(string name, DateTime birth, Gender gender, params object[] additionalParams)
         {
             DepartmentHead? head = additionalParams[0] as DepartmentHead;
