@@ -24,3 +24,6 @@
 - Изменить строку подключения к базу данных в файле `LocalWorker.cs`
 - Убедиться, что сервер базы данных запущен
 - Запустить приложение
+
+## Видео результата
+![alt result](https://github.com/Leo506/EmployeeAccounting/blob/main/Result/result.gif)
