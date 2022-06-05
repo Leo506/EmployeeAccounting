@@ -131,7 +131,7 @@ namespace EmployeeAccounting.DB
 
         public void Edit(Employer oldEmp, Employer newEmp)
         {
-            string sql = $"call Remove{oldEmp.GetType().Name}({oldEmp.GetArgumentForRemove()});";
+            string sql = $"call PrepareToEdit(\"{oldEmp.FullName}\");";
             Trace.WriteLine(sql);
             MySqlCommand command = new MySqlCommand(sql, connection);
 
